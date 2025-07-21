@@ -1,0 +1,344 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="Contatti - Pollici CM | Assistenza e Supporto"
+  description="Contatta il team di Pollici CM per assistenza, supporto tecnico o domande sul convertitore pollici-centimetri."
+  keywords="contatti pollici cm, supporto tecnico, assistenza convertitore, help desk"
+  canonical="https://pollici-in-cm.it/contatti"
+>
+  <Header />
+  <main id="main-content" class="pt-20 lg:pt-24">
+    
+    <!-- Hero Section -->
+    <section class="py-16 lg:py-24 bg-gradient-to-br from-primary-50 to-neutral-100 dark:from-neutral-800 dark:to-neutral-900">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center">
+          <h1 class="text-4xl lg:text-5xl font-bold text-neutral-200 mb-6 serif">
+            <em>Contatti</em>
+          </h1>
+          <p class="text-xl text-neutral-400 italic leading-relaxed">
+            <em>Siamo qui per aiutarti con qualsiasi domanda o problema</em>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="py-16 lg:py-24">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto space-y-12">
+          
+          <!-- Contact Form -->
+          <article class="bg-neutral-800 rounded-2xl p-8 shadow-lg">
+            <h2 class="text-3xl font-bold text-neutral-200 mb-6 serif">
+              <em>Invia un Messaggio</em>
+            </h2>
+            <form class="space-y-6" action="#" method="POST">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label for="nome" class="block text-sm font-semibold text-neutral-300 mb-2">
+                    <em>Nome *</em>
+                  </label>
+                  <input
+                    type="text"
+                    id="nome"
+                    name="nome"
+                    required
+                    class="w-full px-4 py-3 border border-neutral-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-neutral-700 text-neutral-200 transition-all duration-200"
+                    placeholder="Il tuo nome"
+                  />
+                </div>
+                <div>
+                  <label for="email" class="block text-sm font-semibold text-neutral-300 mb-2">
+                    <em>Email *</em>
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    required
+                    class="w-full px-4 py-3 border border-neutral-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-neutral-700 text-neutral-200 transition-all duration-200"
+                    placeholder="la-tua-email@esempio.com"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label for="oggetto" class="block text-sm font-semibold text-neutral-300 mb-2">
+                  <em>Oggetto *</em>
+                </label>
+                <select
+                  id="oggetto"
+                  name="oggetto"
+                  required
+                  class="w-full px-4 py-3 border border-neutral-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-neutral-700 text-neutral-200 transition-all duration-200"
+                >
+                  <option value="">Seleziona un oggetto</option>
+                  <option value="supporto-tecnico">Supporto Tecnico</option>
+                  <option value="errore-calcolo">Errore di Calcolo</option>
+                  <option value="suggerimento">Suggerimento</option>
+                  <option value="partnership">Partnership</option>
+                  <option value="privacy">Questioni Privacy</option>
+                  <option value="altro">Altro</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="messaggio" class="block text-sm font-semibold text-neutral-300 mb-2">
+                  <em>Messaggio *</em>
+                </label>
+                <textarea
+                  id="messaggio"
+                  name="messaggio"
+                  rows="6"
+                  required
+                  class="w-full px-4 py-3 border border-neutral-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-neutral-700 text-neutral-200 transition-all duration-200"
+                  placeholder="Descrivi la tua richiesta o il problema che stai riscontrando..."
+                ></textarea>
+              </div>
+
+              <div class="flex items-start space-x-3">
+                <input
+                  type="checkbox"
+                  id="privacy"
+                  name="privacy"
+                  required
+                  class="mt-1 w-4 h-4 text-primary-500 bg-neutral-700 border-neutral-600 rounded focus:ring-primary-500"
+                />
+                <label for="privacy" class="text-sm text-neutral-400 italic">
+                  <em>Accetto la <a href="/privacy-policy" class="text-primary-400 hover:text-primary-300">Privacy Policy</a> e autorizzo il trattamento dei miei dati personali per rispondere alla mia richiesta. *</em>
+                </label>
+              </div>
+
+              <button
+                type="submit"
+                class="w-full bg-primary-500 hover:bg-primary-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors duration-200 flex items-center justify-center"
+              >
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                </svg>
+                <em>Invia Messaggio</em>
+              </button>
+            </form>
+          </article>
+
+          <!-- Contact Information -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Support Info -->
+            <article class="bg-neutral-800 rounded-2xl p-8 shadow-lg">
+              <h2 class="text-2xl font-bold text-neutral-200 mb-6 serif">
+                <em>Informazioni di Supporto</em>
+              </h2>
+              <div class="space-y-6">
+                <div class="flex items-start space-x-4">
+                  <div class="w-12 h-12 bg-primary-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 class="font-semibold text-neutral-300 mb-2 serif">
+                      <em>Tempi di Risposta</em>
+                    </h3>
+                    <p class="text-neutral-400 text-sm italic">
+                      <em>Rispondiamo generalmente entro 24-48 ore durante i giorni lavorativi</em>
+                    </p>
+                  </div>
+                </div>
+
+                <div class="flex items-start space-x-4">
+                  <div class="w-12 h-12 bg-primary-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 class="font-semibold text-neutral-300 mb-2 serif">
+                      <em>Lingue Supportate</em>
+                    </h3>
+                    <p class="text-neutral-400 text-sm italic">
+                      <em>Italiano, Inglese</em>
+                    </p>
+                  </div>
+                </div>
+
+                <div class="flex items-start space-x-4">
+                  <div class="w-12 h-12 bg-primary-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 class="font-semibold text-neutral-300 mb-2 serif">
+                      <em>Supporto Gratuito</em>
+                    </h3>
+                    <p class="text-neutral-400 text-sm italic">
+                      <em>Tutto il nostro supporto è completamente gratuito</em>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- FAQ Quick Links -->
+            <article class="bg-neutral-800 rounded-2xl p-8 shadow-lg">
+              <h2 class="text-2xl font-bold text-neutral-200 mb-6 serif">
+                <em>Domande Frequenti</em>
+              </h2>
+              <div class="space-y-4">
+                <div class="border-l-4 border-primary-500 pl-4">
+                  <h3 class="font-semibold text-neutral-300 mb-1 serif">
+                    <em>Come funziona il convertitore?</em>
+                  </h3>
+                  <p class="text-neutral-400 text-sm italic">
+                    <em>Il nostro convertitore utilizza la formula standard: pollici × 2.54 = centimetri</em>
+                  </p>
+                </div>
+
+                <div class="border-l-4 border-primary-500 pl-4">
+                  <h3 class="font-semibold text-neutral-300 mb-1 serif">
+                    <em>I calcoli sono accurati?</em>
+                  </h3>
+                  <p class="text-neutral-400 text-sm italic">
+                    <em>Sì, utilizziamo il fattore di conversione internazionale standard</em>
+                  </p>
+                </div>
+
+                <div class="border-l-4 border-primary-500 pl-4">
+                  <h3 class="font-semibold text-neutral-300 mb-1 serif">
+                    <em>Il servizio è gratuito?</em>
+                  </h3>
+                  <p class="text-neutral-400 text-sm italic">
+                    <em>Sì, completamente gratuito e senza registrazione</em>
+                  </p>
+                </div>
+
+                <div class="border-l-4 border-primary-500 pl-4">
+                  <h3 class="font-semibold text-neutral-300 mb-1 serif">
+                    <em>Posso usarlo offline?</em>
+                  </h3>
+                  <p class="text-neutral-400 text-sm italic">
+                    <em>I calcoli funzionano nel browser, ma serve connessione per caricare la pagina</em>
+                  </p>
+                </div>
+              </div>
+
+              <div class="mt-6 pt-6 border-t border-neutral-600">
+                <a 
+                  href="/#guida" 
+                  class="inline-flex items-center text-primary-400 hover:text-primary-300 transition-colors"
+                >
+                  <em>Vedi la guida completa</em>
+                  <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                  </svg>
+                </a>
+              </div>
+            </article>
+          </div>
+
+          <!-- Technical Issues -->
+          <article class="bg-neutral-800 rounded-2xl p-8 shadow-lg">
+            <h2 class="text-3xl font-bold text-neutral-200 mb-6 serif">
+              <em>Problemi Tecnici</em>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div>
+                <h3 class="text-xl font-semibold text-neutral-300 mb-4 serif">
+                  <em>Prima di Contattarci</em>
+                </h3>
+                <ul class="space-y-3 text-neutral-400 italic">
+                  <li class="flex items-start space-x-2">
+                    <span class="text-primary-400 mt-1">1.</span>
+                    <span><em>Prova a ricaricare la pagina (F5 o Ctrl+R)</em></span>
+                  </li>
+                  <li class="flex items-start space-x-2">
+                    <span class="text-primary-400 mt-1">2.</span>
+                    <span><em>Verifica la tua connessione internet</em></span>
+                  </li>
+                  <li class="flex items-start space-x-2">
+                    <span class="text-primary-400 mt-1">3.</span>
+                    <span><em>Prova con un browser diverso</em></span>
+                  </li>
+                  <li class="flex items-start space-x-2">
+                    <span class="text-primary-400 mt-1">4.</span>
+                    <span><em>Disabilita temporaneamente estensioni del browser</em></span>
+                  </li>
+                  <li class="flex items-start space-x-2">
+                    <span class="text-primary-400 mt-1">5.</span>
+                    <span><em>Cancella cache e cookie del sito</em></span>
+                  </li>
+                </ul>
+              </div>
+
+              <div>
+                <h3 class="text-xl font-semibold text-neutral-300 mb-4 serif">
+                  <em>Informazioni Utili da Includere</em>
+                </h3>
+                <ul class="space-y-3 text-neutral-400 italic">
+                  <li class="flex items-start space-x-2">
+                    <span class="text-green-400 mt-1">•</span>
+                    <span><em>Browser utilizzato e versione</em></span>
+                  </li>
+                  <li class="flex items-start space-x-2">
+                    <span class="text-green-400 mt-1">•</span>
+                    <span><em>Sistema operativo</em></span>
+                  </li>
+                  <li class="flex items-start space-x-2">
+                    <span class="text-green-400 mt-1">•</span>
+                    <span><em>Descrizione dettagliata del problema</em></span>
+                  </li>
+                  <li class="flex items-start space-x-2">
+                    <span class="text-green-400 mt-1">•</span>
+                    <span><em>Passaggi per riprodurre l'errore</em></span>
+                  </li>
+                  <li class="flex items-start space-x-2">
+                    <span class="text-green-400 mt-1">•</span>
+                    <span><em>Screenshot se possibile</em></span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <Footer />
+
+  <!-- Form Handling Script -->
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.querySelector('form');
+      
+      if (form) {
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          
+          // Simple form validation
+          const nome = document.getElementById('nome').value.trim();
+          const email = document.getElementById('email').value.trim();
+          const oggetto = document.getElementById('oggetto').value;
+          const messaggio = document.getElementById('messaggio').value.trim();
+          const privacy = document.getElementById('privacy').checked;
+          
+          if (!nome || !email || !oggetto || !messaggio || !privacy) {
+            alert('Per favore, compila tutti i campi obbligatori e accetta la privacy policy.');
+            return;
+          }
+          
+          // Here you would normally send the form data to your server
+          // For now, we'll just show a success message
+          alert('Grazie per il tuo messaggio! Ti risponderemo al più presto.');
+          form.reset();
+        });
+      }
+    });
+  </script>
+</Layout>

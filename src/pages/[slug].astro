@@ -1,0 +1,436 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { parseCSV, generateRelatedConversions, generateCategoryLinks, generateRandomLinks, generatePopularLinks, generateSequentialLinks } from '../utils/csvParser';
+
+// Import CSV data
+import csvData from '../assets/Inches to CM Data.csv?raw';
+
+export async function getStaticPaths() {
+  const conversions = parseCSV(csvData);
+  
+  return conversions.map((conversion) => ({
+    params: { slug: conversion.slug },
+    props: { 
+      conversion,
+      allConversions: conversions
+    }
+  }));
+}
+
+const { conversion, allConversions } = Astro.props;
+const { inches, centimeters, uniqueFact, context, slug } = conversion;
+
+// Generate related conversions
+const relatedConversions = generateRelatedConversions(inches, allConversions);
+
+// Generate navigation links
+const currentIndex = allConversions.findIndex(item => item.slug === slug);
+const navigationLinks = {
+  previous: currentIndex > 0 ? allConversions[currentIndex - 1] : null,
+  next: currentIndex < allConversions.length - 1 ? allConversions[currentIndex + 1] : null,
+  category: generateCategoryLinks(inches, allConversions),
+  random: generateRandomLinks(allConversions, slug),
+  popular: generatePopularLinks(allConversions, slug),
+  sequential: generateSequentialLinks(inches, allConversions)
+};
+
+// SEO content generation
+const title = `Converti ${inches} Pollici in Centimetri | Calcolatore Preciso Online`;
+const description = `Converti ${inches} pollici in centimetri istantaneamente. ${inches} pollici = ${centimeters} cm. Calcolatore gratuito con formula precisa e conversioni correlate.`;
+const keywords = `${inches} pollici cm, conversione ${inches} pollici centimetri, ${inches} in to cm, calcolatore ${inches} pollici`;
+
+// Generate context based on inches value
+let contextActivity = "ingegneria e design";
+if (context === "technology") contextActivity = "device design";
+else if (context === "daily life") contextActivity = "cooking";
+else if (context === "industrial") contextActivity = "large-scale projects";
+---
+
+<Layout
+  title={title}
+  description={description}
+  keywords={keywords}
+>
+  <Header />
+  
+  <main id="main-content" class="pt-20 lg:pt-24">
+    <!-- Hero Section -->
+    <section class="py-16 lg:py-24 bg-gradient-to-br from-primary-50 to-neutral-100 dark:from-neutral-800 dark:to-neutral-900">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center">
+          <h1 class="text-4xl lg:text-5xl font-bold text-neutral-800 dark:text-neutral-200 mb-6 serif">
+            <em>Converti {inches} Pollici in Centimetri</em>
+          </h1>
+          <p class="text-xl text-neutral-600 dark:text-neutral-400 mb-8 italic leading-relaxed">
+            <em>{inches} pollici equivalgono esattamente a <strong>{centimeters} centimetri</strong></em>
+          </p>
+          <div class="bg-white dark:bg-neutral-800 rounded-xl p-6 shadow-lg inline-block">
+            <div class="text-3xl font-bold text-primary-600 dark:text-primary-400 mb-2">
+              {inches}" = {centimeters} cm
+            </div>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400 italic">
+              <em>Formula: {inches} × 2.54 = {centimeters}</em>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Calculator Section -->
+    <section class="py-16 lg:py-24 bg-white dark:bg-neutral-800">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl lg:text-4xl font-bold text-neutral-800 dark:text-neutral-200 mb-4 serif">
+              <em>Calcolatore Pollici - Centimetri</em>
+            </h2>
+            <p class="text-lg text-neutral-600 dark:text-neutral-400 italic">
+              <em>Prova altre conversioni con il nostro calcolatore preciso</em>
+            </p>
+          </div>
+
+          <div class="bg-gradient-to-br from-primary-50 to-neutral-100 dark:from-neutral-700 dark:to-neutral-800 rounded-2xl p-8 shadow-xl">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <!-- Input Section -->
+              <div class="space-y-6">
+                <div>
+                  <label for="inches-input" class="block text-sm font-semibold text-neutral-700 dark:text-neutral-300 mb-2">
+                    <em>Inserisci i pollici da convertire:</em>
+                  </label>
+                  <div class="relative">
+                    <input
+                      type="number"
+                      id="inches-input"
+                      value={inches}
+                      step="0.01"
+                      placeholder="es. 12.5"
+                      class="w-full px-4 py-3 text-lg border-2 border-primary-200 dark:border-neutral-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-neutral-700 dark:text-neutral-200 transition-all duration-200"
+                    />
+                    <span class="absolute right-3 top-3 text-neutral-500 dark:text-neutral-400 font-medium">pollici</span>
+                  </div>
+                </div>
+
+                <button 
+                  onclick="convert()" 
+                  class="w-full bg-primary-500 hover:bg-primary-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors duration-200"
+                >
+                  <em>Converti</em>
+                </button>
+              </div>
+
+              <!-- Results Section -->
+              <div class="space-y-6">
+                <div class="bg-white dark:bg-neutral-800 rounded-xl p-6 shadow-md">
+                  <h3 class="text-xl font-bold text-neutral-800 dark:text-neutral-200 mb-4 serif">
+                    <em>Risultato:</em>
+                  </h3>
+                  
+                  <div class="space-y-4">
+                    <div class="flex justify-between items-center p-3 bg-primary-50 dark:bg-neutral-700 rounded-lg">
+                      <span class="font-medium text-neutral-700 dark:text-neutral-300 italic">
+                        <em>Centimetri:</em>
+                      </span>
+                      <span class="text-xl font-bold text-primary-600 dark:text-primary-400" id="result-cm">{centimeters} cm</span>
+                    </div>
+
+                    <div class="flex justify-between items-center p-3 bg-neutral-100 dark:bg-neutral-700 rounded-lg">
+                      <span class="font-medium text-neutral-700 dark:text-neutral-300 italic">
+                        <em>Millimetri:</em>
+                      </span>
+                      <span class="text-xl font-bold text-neutral-600 dark:text-neutral-400" id="result-mm">{centimeters * 10} mm</span>
+                    </div>
+                  </div>
+
+                  <div class="mt-6 p-4 bg-primary-100 dark:bg-neutral-600 rounded-lg">
+                    <p class="text-sm text-neutral-700 dark:text-neutral-300 italic" id="formula">
+                      <em><strong>Formula:</strong> <span id="formula-inches">{inches}</span> pollici × 2.54 = <span id="formula-result">{centimeters}</span> cm</em>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Content Section -->
+    <section class="py-16 lg:py-24 bg-neutral-50 dark:bg-neutral-900">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto space-y-12">
+          
+          <!-- About This Conversion -->
+          <article class="bg-white dark:bg-neutral-800 rounded-2xl p-8 shadow-lg">
+            <h2 class="text-3xl font-bold text-neutral-800 dark:text-neutral-200 mb-6 serif">
+              <em>Informazioni sulla Conversione di {inches} Pollici</em>
+            </h2>
+            <div class="prose prose-lg max-w-none text-neutral-600 dark:text-neutral-400 italic space-y-6">
+              <p>
+                <em>{uniqueFact}</em>
+              </p>
+              <p>
+                <em>Convertire {inches} pollici in centimetri è semplice: moltiplica per 2.54. Quindi {inches} pollici × 2.54 = {centimeters} cm. Questa conversione è particolarmente utile in settori come {contextActivity}, dove le misurazioni precise sono fondamentali.</em>
+              </p>
+              <p>
+                <em>Il fattore di conversione 2.54 deriva dalla definizione internazionale stabilita nel 1959, che garantisce uniformità mondiale nelle misurazioni. Questa standardizzazione è essenziale per il commercio internazionale e la collaborazione tecnica.</em>
+              </p>
+            </div>
+          </article>
+
+          <!-- Related Conversions -->
+          <article class="bg-white dark:bg-neutral-800 rounded-2xl p-8 shadow-lg">
+            <h2 class="text-3xl font-bold text-neutral-800 dark:text-neutral-200 mb-6 serif">
+              <em>Conversioni Correlate</em>
+            </h2>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse">
+                <thead>
+                  <tr class="bg-primary-50 dark:bg-neutral-700">
+                    <th class="p-4 border border-neutral-200 dark:border-neutral-600 font-semibold text-neutral-800 dark:text-neutral-200">
+                      <em>Pollici</em>
+                    </th>
+                    <th class="p-4 border border-neutral-200 dark:border-neutral-600 font-semibold text-neutral-800 dark:text-neutral-200">
+                      <em>Centimetri</em>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {relatedConversions.map((related) => (
+                    <tr class="hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-colors">
+                      <td class="p-4 border border-neutral-200 dark:border-neutral-600">
+                        <a 
+                          href={`/${related.slug}`} 
+                          class="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium italic"
+                        >
+                          <em>{related.inches} pollici</em>
+                        </a>
+                      </td>
+                      <td class="p-4 border border-neutral-200 dark:border-neutral-600 text-neutral-600 dark:text-neutral-400">
+                        {related.centimeters} cm
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </article>
+
+          <!-- Navigation Links -->
+          <article class="bg-white dark:bg-neutral-800 rounded-2xl p-8 shadow-lg">
+            <h2 class="text-3xl font-bold text-neutral-800 dark:text-neutral-200 mb-6 serif">
+              <em>Esplora Altre Conversioni</em>
+            </h2>
+            
+            <!-- Previous/Next Navigation -->
+            <div class="flex justify-between items-center mb-8 p-4 bg-primary-50 dark:bg-neutral-700 rounded-lg">
+              <div class="flex-1">
+                {navigationLinks.previous && (
+                  <a 
+                    href={`/${navigationLinks.previous.slug}`}
+                    class="flex items-center text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors"
+                  >
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                    <div>
+                      <div class="text-sm text-neutral-600 dark:text-neutral-400 italic"><em>Precedente</em></div>
+                      <div class="font-semibold italic"><em>{navigationLinks.previous.inches} Pollici</em></div>
+                    </div>
+                  </a>
+                )}
+              </div>
+              
+              <div class="flex-1 text-right">
+                {navigationLinks.next && (
+                  <a 
+                    href={`/${navigationLinks.next.slug}`}
+                    class="flex items-center justify-end text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors"
+                  >
+                    <div class="text-right">
+                      <div class="text-sm text-neutral-600 dark:text-neutral-400 italic"><em>Successivo</em></div>
+                      <div class="font-semibold italic"><em>{navigationLinks.next.inches} Pollici</em></div>
+                    </div>
+                    <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                  </a>
+                )}
+              </div>
+            </div>
+
+            <!-- Category Links -->
+            <div class="mb-8">
+              <h3 class="text-xl font-semibold text-neutral-800 dark:text-neutral-200 mb-4 serif">
+                <em>Conversioni Simili</em>
+              </h3>
+              <div class="grid grid-cols-2 md:grid-cols-6 gap-3">
+                {navigationLinks.category.slice(0, 12).map((item) => (
+                  <a 
+                    href={`/${item.slug}`}
+                    class="bg-neutral-100 dark:bg-neutral-700 hover:bg-primary-100 dark:hover:bg-neutral-600 p-3 rounded-lg text-center transition-colors group"
+                  >
+                    <div class="text-lg font-bold text-primary-600 dark:text-primary-400 group-hover:text-primary-700 dark:group-hover:text-primary-300">
+                      {item.inches}"
+                    </div>
+                    <div class="text-sm text-neutral-600 dark:text-neutral-400 italic">
+                      <em>{item.centimeters} cm</em>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            <!-- Sequential Links -->
+            <div>
+              <h3 class="text-xl font-semibold text-neutral-800 dark:text-neutral-200 mb-4 serif">
+                <em>Conversioni Sequenziali</em>
+              </h3>
+              <div class="grid grid-cols-2 md:grid-cols-5 gap-3 mb-8">
+                {navigationLinks.sequential.slice(0, 10).map((item) => (
+                  <a 
+                    href={`/${item.slug}`}
+                    class="bg-neutral-100 dark:bg-neutral-700 hover:bg-primary-100 dark:hover:bg-neutral-600 p-3 rounded-lg text-center transition-colors group"
+                  >
+                    <div class="text-lg font-bold text-primary-600 dark:text-primary-400 group-hover:text-primary-700 dark:group-hover:text-primary-300">
+                      {item.inches}"
+                    </div>
+                    <div class="text-sm text-neutral-600 dark:text-neutral-400 italic">
+                      <em>{item.centimeters} cm</em>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            <!-- Popular Conversions -->
+            <div class="mb-8">
+              <h3 class="text-xl font-semibold text-neutral-800 dark:text-neutral-200 mb-4 serif">
+                <em>Conversioni Popolari</em>
+              </h3>
+              <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
+                {navigationLinks.popular.slice(0, 10).map((item) => (
+                  <a 
+                    href={`/${item.slug}`}
+                    class="bg-neutral-100 dark:bg-neutral-700 hover:bg-primary-100 dark:hover:bg-neutral-600 p-3 rounded-lg text-center transition-colors group"
+                  >
+                    <div class="text-lg font-bold text-primary-600 dark:text-primary-400 group-hover:text-primary-700 dark:group-hover:text-primary-300">
+                      {item.inches}"
+                    </div>
+                    <div class="text-sm text-neutral-600 dark:text-neutral-400 italic">
+                      <em>{item.centimeters} cm</em>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            <!-- Random Discovery Links -->
+            <div>
+              <h3 class="text-xl font-semibold text-neutral-800 dark:text-neutral-200 mb-4 serif">
+                <em>Scopri Altre Misure</em>
+              </h3>
+              <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                {navigationLinks.random.slice(0, 8).map((item) => (
+                  <a 
+                    href={`/${item.slug}`}
+                    class="bg-neutral-100 dark:bg-neutral-700 hover:bg-primary-100 dark:hover:bg-neutral-600 p-3 rounded-lg text-center transition-colors group"
+                  >
+                    <div class="text-lg font-bold text-primary-600 dark:text-primary-400 group-hover:text-primary-700 dark:group-hover:text-primary-300">
+                      {item.inches}"
+                    </div>
+                    <div class="text-sm text-neutral-600 dark:text-neutral-400 italic">
+                      <em>{item.centimeters} cm</em>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </article>
+
+          <!-- FAQ Section -->
+          <article class="bg-white dark:bg-neutral-800 rounded-2xl p-8 shadow-lg">
+            <h2 class="text-3xl font-bold text-neutral-800 dark:text-neutral-200 mb-6 serif">
+              <em>Domande Frequenti su {inches} Pollici</em>
+            </h2>
+            <div class="space-y-6">
+              <div class="border-b border-neutral-200 dark:border-neutral-600 pb-4">
+                <h3 class="font-semibold text-neutral-700 dark:text-neutral-300 mb-2 italic">
+                  <em>Quanto sono {inches} pollici in centimetri?</em>
+                </h3>
+                <p class="text-neutral-600 dark:text-neutral-400 italic">
+                  <em>{inches} pollici corrispondono esattamente a {centimeters} centimetri, utilizzando il fattore di conversione internazionale standard di 2.54 cm per pollice.</em>
+                </p>
+              </div>
+
+              <div class="border-b border-neutral-200 dark:border-neutral-600 pb-4">
+                <h3 class="font-semibold text-neutral-700 dark:text-neutral-300 mb-2 italic">
+                  <em>Come si calcola la conversione di {inches} pollici?</em>
+                </h3>
+                <p class="text-neutral-600 dark:text-neutral-400 italic">
+                  <em>Per convertire {inches} pollici in centimetri, moltiplica {inches} per 2.54. La formula è: {inches} × 2.54 = {centimeters} cm.</em>
+                </p>
+              </div>
+
+              <div>
+                <h3 class="font-semibold text-neutral-700 dark:text-neutral-300 mb-2 italic">
+                  <em>In quali contesti si usa la misura di {inches} pollici?</em>
+                </h3>
+                <p class="text-neutral-600 dark:text-neutral-400 italic">
+                  <em>La misura di {inches} pollici è comunemente utilizzata in {contextActivity} e in molte applicazioni internazionali dove è necessaria la conversione tra sistemi di misurazione.</em>
+                </p>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+  
+  <Footer />
+
+  <!-- Schema.org structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MathSolver",
+    "name": "Convertitore ${inches} Pollici in Centimetri",
+    "description": "Converti ${inches} pollici in centimetri con precisione matematica",
+    "url": "https://pollici-in-cm.it/${slug}",
+    "inLanguage": "it-IT",
+    "mathExpression": "${inches} × 2.54 = ${centimeters}",
+    "usageInfo": {
+      "@type": "CreativeWork",
+      "name": "Guida all'uso del convertitore",
+      "description": "Inserisci il valore in pollici per ottenere la conversione precisa in centimetri utilizzando il fattore standard internazionale 2.54",
+      "text": "Formula: Pollici × 2.54 = Centimetri. Esempio: ${inches} pollici × 2.54 = ${centimeters} centimetri"
+    }
+  }
+  </script>
+
+  <script is:inline>
+    function convert() {
+      const inchesInput = document.getElementById('inches-input');
+      const inches = parseFloat(inchesInput.value);
+      
+      if (isNaN(inches) || inches < 0) {
+        document.getElementById('result-cm').textContent = '0.00 cm';
+        document.getElementById('result-mm').textContent = '0.00 mm';
+        document.getElementById('formula-inches').textContent = '0';
+        document.getElementById('formula-result').textContent = '0.00';
+        return;
+      }
+      
+      const cm = (inches * 2.54).toFixed(2);
+      const mm = (cm * 10).toFixed(1);
+      
+      document.getElementById('result-cm').textContent = cm + ' cm';
+      document.getElementById('result-mm').textContent = mm + ' mm';
+      document.getElementById('formula-inches').textContent = inches;
+      document.getElementById('formula-result').textContent = cm;
+    }
+  </script>
+</Layout>
