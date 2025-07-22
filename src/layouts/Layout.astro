@@ -14,6 +14,9 @@ const {
 } = Astro.props;
 
 const canonicalURL = canonical || Astro.url.href;
+
+// Fix canonical URL to use production domain
+const productionCanonicalURL = canonical || canonicalURL.replace('http://localhost:4321', 'https://pollici-in-cm.it');
 ---
 
 <!doctype html>
@@ -27,13 +30,13 @@ const canonicalURL = canonical || Astro.url.href;
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="keywords" content={keywords} />
-    <link rel="canonical" href={canonicalURL} />
+    <link rel="canonical" href={productionCanonicalURL} />
     
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:url" content={productionCanonicalURL} />
     <meta property="og:site_name" content="Pollici CM - Conversione Pollici Centimetri" />
     
     <!-- Twitter Card -->
@@ -64,10 +67,15 @@ const canonicalURL = canonical || Astro.url.href;
         "itemListElement": [
           {
             "@type": "ListItem",
-            "item": "https://pollici-in-cm.it/6-pollici-in-centimetri.html"
+            "position": 1,
+            "name": "Home",
+            "item": "https://pollici-in-cm.it/"
           },
           {
-            "item": "6 Pollici"
+            "@type": "ListItem",
+            "position": 2,
+            "name": "6 Pollici",
+            "item": "https://pollici-in-cm.it/6-pollici-in-cm"
           }
         ]
       }
