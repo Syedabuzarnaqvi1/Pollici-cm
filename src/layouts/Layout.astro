@@ -51,19 +51,27 @@ const canonicalURL = canonical || Astro.url.href;
     
     <!-- Schema.org structured data -->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "Pollici CM - Conversione Pollici Centimetri",
-      "description": "Converti facilmente pollici in centimetri con il nostro calcolatore preciso e affidabile. Guida completa alla conversione.",
-      "url": "https://pollici-in-cm.it",
-      "sameAs": [],
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://pollici-in-cm.it/?q={search_term_string}",
-        "query-input": "required name=search_term_string"
+    [
+      {
+        "@context": "http://schema.org",
+        "@type": "WebSite",
+        "name": "Pollici In Centimetri",
+        "url": "https://pollici-in-cm.it/"
+      },
+      {
+        "@context": "http://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "item": "https://pollici-in-cm.it/6-pollici-in-centimetri.html"
+          },
+          {
+            "item": "6 Pollici"
+          }
+        ]
       }
-    }
+    ]
     </script>
   </head>
   

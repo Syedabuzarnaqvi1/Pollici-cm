@@ -392,24 +392,6 @@ else if (context === "industrial") contextActivity = "large-scale projects";
   
   <Footer />
 
-  <!-- Schema.org structured data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "MathSolver",
-    "name": "Convertitore ${inches} Pollici in Centimetri",
-    "description": "Converti ${inches} pollici in centimetri con precisione matematica",
-    "url": "https://pollici-in-cm.it/${slug}",
-    "inLanguage": "it-IT",
-    "mathExpression": "${inches} × 2.54 = ${centimeters}",
-    "usageInfo": {
-      "@type": "CreativeWork",
-      "name": "Guida all'uso del convertitore",
-      "description": "Inserisci il valore in pollici per ottenere la conversione precisa in centimetri utilizzando il fattore standard internazionale 2.54",
-      "text": "Formula: Pollici × 2.54 = Centimetri. Esempio: ${inches} pollici × 2.54 = ${centimeters} centimetri"
-    }
-  }
-  </script>
 
   <script is:inline>
     function convert() {
