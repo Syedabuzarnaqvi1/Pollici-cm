@@ -46,6 +46,23 @@ let contextActivity = "ingegneria e design";
 if (context === "technology") contextActivity = "device design";
 else if (context === "daily life") contextActivity = "cooking";
 else if (context === "industrial") contextActivity = "large-scale projects";
+
+// Generate BreadcrumbList schema
+const breadcrumbSchema = {
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@type": "Thing",
+        "@id": `https://pollici-in-cm.it/${slug}`,
+        "name": `${inches} Pollici`
+      }
+    }
+  ]
+};
 ---
 
 <Layout
@@ -53,25 +70,7 @@ else if (context === "industrial") contextActivity = "large-scale projects";
   description={description}
   keywords={keywords}
 >
-  <Fragment slot="head">
-    <script type="application/ld+json">
-      {
-        "@context": "http://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "item": {
-              "@type": "Thing",
-              "@id": `https://pollici-in-cm.it/${slug}`,
-              "name": `${inches} Pollici`
-            }
-          }
-        ]
-      }
-    </script>
-  </Fragment>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumbSchema)}></script>
 
   <Header />
   
