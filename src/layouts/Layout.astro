@@ -6,6 +6,7 @@ export interface Props {
   canonical?: string;
   isHomepage?: boolean;
   breadcrumbName?: string;
+  breadcrumbSchema?: object;
 }
 
 const { 
@@ -14,7 +15,8 @@ const {
   keywords = "pollici cm, conversione pollici centimetri, calcolatore pollici, inches to cm", 
   canonical,
   isHomepage = false,
-  breadcrumbName
+  breadcrumbName,
+  breadcrumbSchema
 } = Astro.props;
 
 const canonicalURL = canonical || Astro.url.href;
@@ -66,6 +68,15 @@ const productionCanonicalURL = canonical || canonicalURL.replace('http://localho
         "url": "https://pollici-in-cm.it/"
       }
     </script>
+    
+    <!-- BreadcrumbList schema only on calculation pages -->
+    {breadcrumbSchema && (
+      <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)}></script>
+    )}
+    
+    <!-- Hreflang tags -->
+    <link rel="alternate" hreflang="it" href={productionCanonicalURL} />
+    <link rel="alternate" hreflang="x-default" href={productionCanonicalURL} />
   </head>
   
   <body class="bg-neutral-900 text-neutral-200">

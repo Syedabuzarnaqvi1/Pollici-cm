@@ -41,12 +41,6 @@ const title = `Converti ${inches} Pollici in Centimetri | Calcolatore Preciso On
 const description = `Converti ${inches} pollici in centimetri istantaneamente. ${inches} pollici = ${centimeters} cm. Calcolatore gratuito con formula precisa e conversioni correlate.`;
 const keywords = `${inches} pollici cm, conversione ${inches} pollici centimetri, ${inches} in to cm, calcolatore ${inches} pollici`;
 
-// Generate context based on inches value
-let contextActivity = "ingegneria e design";
-if (context === "technology") contextActivity = "device design";
-else if (context === "daily life") contextActivity = "cooking";
-else if (context === "industrial") contextActivity = "large-scale projects";
-
 // Generate BreadcrumbList schema
 const breadcrumbSchema = {
   "@context": "http://schema.org",
@@ -55,23 +49,26 @@ const breadcrumbSchema = {
     {
       "@type": "ListItem",
       "position": 1,
+      "name": `${inches} Pollici`,
       "item": {
         "@type": "Thing",
-        "@id": `https://pollici-in-cm.it/${slug}`,
-        "name": `${inches} Pollici`
+        "@id": `https://pollici-in-cm.it/${slug}`
       }
     }
   ]
 };
+
+// Generate context based on inches value
+let contextActivity = "ingegneria e design";
+if (context === "technology") contextActivity = "device design";
+else if (context === "daily life") contextActivity = "cooking";
+else if (context === "industrial") contextActivity = "large-scale projects";
 ---
 
 <Layout
   title={title}
   description={description}
   keywords={keywords}
->
-  <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumbSchema)}></script>
-
   <Header />
   
   <main id="main-content" class="pt-20 lg:pt-24">
