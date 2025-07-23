@@ -53,23 +53,25 @@ else if (context === "industrial") contextActivity = "large-scale projects";
   description={description}
   keywords={keywords}
 >
-  <script type="application/ld+json" slot="head">
-    {
-      "@context": "http://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "item": {
-            "@type": "Thing",
-            "@id": `https://pollici-in-cm.it/${slug}`,
-            "name": `${inches} Pollici`
+  <Fragment slot="head">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+              "@type": "Thing",
+              "@id": `https://pollici-in-cm.it/${slug}`,
+              "name": `${inches} Pollici`
+            }
           }
-        }
-      ]
-    }
-  </script>
+        ]
+      }
+    </script>
+  </Fragment>
 
   <Header />
   
