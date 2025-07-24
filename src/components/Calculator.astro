@@ -169,6 +169,10 @@ function calculator() {
   }
 }
 
-// Expose calculator function to global scope for Alpine.js
-window.calculator = calculator;
+// Initialize calculator when DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+  if (typeof window.Alpine !== 'undefined') {
+    window.calculator = calculator;
+  }
+});
 </script>

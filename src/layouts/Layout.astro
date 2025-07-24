@@ -53,23 +53,13 @@ const productionCanonicalURL = canonical || canonicalURL.replace('http://localho
     <meta name="twitter:description" content={description} />
     
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap" rel="stylesheet"></noscript>
     
-    <!-- Schema.org structured data - Website schema only on homepage -->
-    <!-- Website schema on all pages -->
-    <script type="application/ld+json">
-      {
-        "@context": "http://schema.org",
-        "@type": "WebSite",
-        "name": "Pollici In Centimetri",
-        "url": "https://pollici-in-cm.it/"
-      }
-    </script>
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     
     <!-- WebApplication schema on all pages -->
    <script type="application/ld+json">
@@ -154,7 +144,6 @@ const productionCanonicalURL = canonical || canonicalURL.replace('http://localho
 }
 </script>
     
-    <!-- BreadcrumbList schema for non-homepage pages -->
   </head>
   
   <body class="bg-neutral-900 text-neutral-200">
@@ -190,15 +179,41 @@ const productionCanonicalURL = canonical || canonicalURL.replace('http://localho
 <style is:global>
   html {
     scroll-behavior: smooth;
+    font-display: swap;
   }
   
   body {
     font-family: 'Poppins', system-ui, sans-serif;
     line-height: 1.6;
+    font-display: swap;
   }
   
   .serif {
     font-family: 'Lora', Georgia, serif;
+    font-display: swap;
+  }
+  
+  /* Critical CSS for above-the-fold content */
+  .hero-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Preload critical resources */
+  @media (prefers-reduced-motion: no-preference) {
+    .animate-fade-in {
+      animation: fadeIn 0.8s ease-out;
+    }
+    
+    .animate-slide-up {
+      animation: slideUp 0.6s ease-out;
+    }
+    
+    .animate-scale-in {
+      animation: scaleIn 0.5s ease-out;
+    }
   }
   
   /* Custom scrollbar */
