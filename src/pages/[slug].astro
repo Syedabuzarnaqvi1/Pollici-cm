@@ -23,17 +23,27 @@ const { conversion, allConversions } = Astro.props;
 const { inches, centimeters, uniqueFact, context, slug } = conversion;
 
 // Generate related conversions
-const relatedConversions = generateRelatedConversions(inches, allConversions);
+const relatedConversions = generateRelatedConversions(inches, allConversions).filter(item => 
+  allConversions.some(conv => conv.slug === item.slug)
+);
 
 // Generate navigation links
 const currentIndex = allConversions.findIndex(item => item.slug === slug);
 const navigationLinks = {
   previous: currentIndex > 0 ? allConversions[currentIndex - 1] : null,
   next: currentIndex < allConversions.length - 1 ? allConversions[currentIndex + 1] : null,
-  category: generateCategoryLinks(inches, allConversions),
-  random: generateRandomLinks(allConversions, slug),
-  popular: generatePopularLinks(allConversions, slug),
-  sequential: generateSequentialLinks(inches, allConversions)
+  category: generateCategoryLinks(inches, allConversions).filter(item => 
+    allConversions.some(conv => conv.slug === item.slug)
+  ),
+  random: generateRandomLinks(allConversions, slug).filter(item => 
+    allConversions.some(conv => conv.slug === item.slug)
+  ),
+  popular: generatePopularLinks(allConversions, slug).filter(item => 
+    allConversions.some(conv => conv.slug === item.slug)
+  ),
+  sequential: generateSequentialLinks(inches, allConversions).filter(item => 
+    allConversions.some(conv => conv.slug === item.slug)
+  )
 };
 
 // SEO content generation
