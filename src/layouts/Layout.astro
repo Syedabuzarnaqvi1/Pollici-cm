@@ -89,8 +89,58 @@ const productionCanonicalURL = canonical || canonicalURL.replace('http://localho
     
     <!-- Global JavaScript -->
     <script>
-      // Smooth scrolling for anchor links
+      // Header functionality
       document.addEventListener('DOMContentLoaded', function() {
+        // Header scroll effect
+        const header = document.getElementById('main-header');
+        if (header) {
+          window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+              header.classList.add('bg-neutral-900/90', 'backdrop-blur-md', 'shadow-lg');
+              header.classList.remove('bg-transparent');
+            } else {
+              header.classList.remove('bg-neutral-900/90', 'backdrop-blur-md', 'shadow-lg');
+              header.classList.add('bg-transparent');
+            }
+          });
+        }
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        const closeIcon = document.getElementById('close-icon');
+        
+        if (mobileMenuButton && mobileMenu) {
+          mobileMenuButton.addEventListener('click', function() {
+            const isOpen = mobileMenu.style.display !== 'none';
+            
+            if (isOpen) {
+              mobileMenu.style.display = 'none';
+              menuIcon.style.display = 'block';
+              closeIcon.style.display = 'none';
+              mobileMenuButton.setAttribute('aria-expanded', 'false');
+            } else {
+              mobileMenu.style.display = 'block';
+              menuIcon.style.display = 'none';
+              closeIcon.style.display = 'block';
+              mobileMenuButton.setAttribute('aria-expanded', 'true');
+            }
+          });
+
+          // Close mobile menu when clicking on links
+          const mobileLinks = mobileMenu.querySelectorAll('a');
+          mobileLinks.forEach(link => {
+            link.addEventListener('click', function() {
+              mobileMenu.style.display = 'none';
+              menuIcon.style.display = 'block';
+              closeIcon.style.display = 'none';
+              mobileMenuButton.setAttribute('aria-expanded', 'false');
+            });
+          });
+        }
+
+        // Smooth scrolling for anchor links
         const links = document.querySelectorAll('a[href^="#"]');
         links.forEach(link => {
           link.addEventListener('click', function(e) {

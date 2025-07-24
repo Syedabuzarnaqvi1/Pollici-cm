@@ -3,12 +3,7 @@
 
 <header 
   class="fixed top-0 left-0 right-0 z-40 transition-all duration-300"
-  x-data="{ isScrolled: false, mobileMenuOpen: false }"
-  x-init="window.addEventListener('scroll', () => { isScrolled = window.scrollY > 50 })"
-  :class="{ 
-    'bg-neutral-900/90 backdrop-blur-md shadow-lg': isScrolled,
-    'bg-transparent': !isScrolled 
-  }"
+  id="main-header"
 >
   <nav class="container mx-auto px-4 sm:px-6 lg:px-8" role="navigation" aria-label="Navigazione principale">
     <div class="flex items-center justify-between h-16 lg:h-20">
@@ -16,11 +11,7 @@
       <div class="flex-shrink-0">
         <a 
           href="/" 
-          class="text-2xl font-bold transition-colors duration-200"
-          :class="{ 
-            'text-white hover:text-primary-300': !isScrolled,
-            'text-primary-400 hover:text-primary-300': isScrolled 
-          }"
+          class="text-2xl font-bold transition-colors duration-200 text-primary-400 hover:text-primary-300"
           aria-label="Pollici CM - Pagina principale"
         >
           <span class="serif italic">Pollici</span><span class="text-neutral-300">CM</span>
@@ -32,51 +23,31 @@
         <div class="flex items-center space-x-8">
           <a 
             href="/" 
-            class="font-medium transition-colors duration-200 italic"
-            :class="{ 
-              'text-white hover:text-primary-300': !isScrolled,
-              'text-neutral-200 hover:text-primary-400': isScrolled 
-            }"
+            class="font-medium transition-colors duration-200 italic text-neutral-200 hover:text-primary-400"
           >
             <em>Home</em>
           </a>
           <a 
             href="/chi-siamo" 
-            class="font-medium transition-colors duration-200 italic"
-            :class="{ 
-              'text-white hover:text-primary-300': !isScrolled,
-              'text-neutral-200 hover:text-primary-400': isScrolled 
-            }"
+            class="font-medium transition-colors duration-200 italic text-neutral-200 hover:text-primary-400"
           >
             <em>Chi Siamo</em>
           </a>
           <a 
             href="/#calcolatore" 
-            class="font-medium transition-colors duration-200 italic"
-            :class="{ 
-              'text-white hover:text-primary-300': !isScrolled,
-              'text-neutral-200 hover:text-primary-400': isScrolled 
-            }"
+            class="font-medium transition-colors duration-200 italic text-neutral-200 hover:text-primary-400"
           >
             <em>Calcolatore</em>
           </a>
           <a 
             href="/conversioni-popolari" 
-            class="font-medium transition-colors duration-200 italic"
-            :class="{ 
-              'text-white hover:text-primary-300': !isScrolled,
-              'text-neutral-200 hover:text-primary-400': isScrolled 
-            }"
+            class="font-medium transition-colors duration-200 italic text-neutral-200 hover:text-primary-400"
           >
             <em>Conversioni Popolari</em>
           </a>
           <a 
             href="/contatti" 
-            class="font-medium transition-colors duration-200 italic"
-            :class="{ 
-              'text-white hover:text-primary-300': !isScrolled,
-              'text-neutral-200 hover:text-primary-400': isScrolled 
-            }"
+            class="font-medium transition-colors duration-200 italic text-neutral-200 hover:text-primary-400"
           >
             <em>Contatti</em>
           </a>
@@ -87,62 +58,53 @@
       <div class="flex items-center">
         <!-- Mobile menu button -->
         <button
-          @click="mobileMenuOpen = !mobileMenuOpen"
+          id="mobile-menu-button"
           class="md:hidden p-2 rounded-md transition-colors duration-200"
-          :class="{ 
-            'text-white hover:text-primary-300 hover:bg-white/10': !isScrolled,
-            'text-neutral-200 hover:text-primary-400 hover:bg-neutral-800': isScrolled 
-          }"
+          class="text-neutral-200 hover:text-primary-400 hover:bg-neutral-800"
           aria-label="Menu di navigazione"
           aria-expanded="false"
         >
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path x-show="!mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-            <path x-show="mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            <path id="close-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" style="display: none;"></path>
           </svg>
         </button>
       </div>
     </div>
 
     <!-- Mobile Navigation -->
-    <div x-show="mobileMenuOpen" x-transition class="md:hidden">
+    <div id="mobile-menu" class="md:hidden" style="display: none;">
       <div class="px-2 pt-2 pb-3 space-y-1 bg-neutral-900 rounded-lg mt-2 shadow-lg">
         <a 
           href="/" 
           class="block px-3 py-2 text-neutral-300 hover:text-primary-400 font-medium transition-colors duration-200 italic"
-          @click="mobileMenuOpen = false"
         >
           <em>Home</em>
         </a>
         <a 
           href="/chi-siamo" 
           class="block px-3 py-2 text-neutral-300 hover:text-primary-400 font-medium transition-colors duration-200 italic"
-          @click="mobileMenuOpen = false"
         >
           <em>Chi Siamo</em>
         </a>
         <a 
           href="/#calcolatore" 
           class="block px-3 py-2 text-neutral-300 hover:text-primary-400 font-medium transition-colors duration-200 italic"
-          @click="mobileMenuOpen = false"
         >
           <em>Calcolatore</em>
         </a>
         <a 
           href="/conversioni-popolari" 
           class="block px-3 py-2 text-neutral-300 hover:text-primary-400 font-medium transition-colors duration-200 italic"
-          @click="mobileMenuOpen = false"
         >
           <em>Conversioni Popolari</em>
         </a>
         <a 
           href="/contatti" 
           class="block px-3 py-2 text-neutral-300 hover:text-primary-400 font-medium transition-colors duration-200 italic"
-          @click="mobileMenuOpen = false"
         >
           <em>Contatti</em>
         </a>
       </div>
     </div>
   </nav>
-</header>
