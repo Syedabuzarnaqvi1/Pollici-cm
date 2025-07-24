@@ -22,57 +22,24 @@ export async function getStaticPaths() {
 const { conversion, allConversions } = Astro.props;
 const { inches, centimeters, uniqueFact, context, slug } = conversion;
 
-// Generate canonical URL
-const canonical = `https://pollici-in-cm.it/${slug}/`;
-
 // Generate related conversions
-const relatedConversions = generateRelatedConversions(inches, allConversions).filter(item => 
-  allConversions.some(conv => conv.slug === item.slug)
-);
+const relatedConversions = generateRelatedConversions(inches, allConversions);
 
 // Generate navigation links
 const currentIndex = allConversions.findIndex(item => item.slug === slug);
 const navigationLinks = {
   previous: currentIndex > 0 ? allConversions[currentIndex - 1] : null,
   next: currentIndex < allConversions.length - 1 ? allConversions[currentIndex + 1] : null,
-  category: generateCategoryLinks(inches, allConversions).filter(item => 
-    allConversions.some(conv => conv.slug === item.slug)
-  ),
-  random: generateRandomLinks(allConversions, slug).filter(item => 
-    allConversions.some(conv => conv.slug === item.slug)
-  ),
-  popular: generatePopularLinks(allConversions, slug).filter(item => 
-    allConversions.some(conv => conv.slug === item.slug)
-  ),
-  sequential: generateSequentialLinks(inches, allConversions).filter(item => 
-    allConversions.some(conv => conv.slug === item.slug)
-  )
+  category: generateCategoryLinks(inches, allConversions),
+  random: generateRandomLinks(allConversions, slug),
+  popular: generatePopularLinks(allConversions, slug),
+  sequential: generateSequentialLinks(inches, allConversions)
 };
 
 // SEO content generation
 const title = `Converti ${inches} Pollici in Centimetri | Calcolatore Preciso Online`;
 const description = `Converti ${inches} pollici in centimetri istantaneamente. ${inches} pollici = ${centimeters} cm. Calcolatore gratuito con formula precisa e conversioni correlate.`;
 const keywords = `${inches} pollici cm, conversione ${inches} pollici centimetri, ${inches} in to cm, calcolatore ${inches} pollici`;
-
-// Generate production canonical URL
-const productionCanonicalURL = canonical;
-
-// Generate BreadcrumbList schema
-const breadcrumbSchema = {
-  "@context": "http://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "name": `${inches} Pollici`,
-      "item": {
-        "@type": "Thing",
-        "@id": `https://pollici-in-cm.it/${slug}`
-      }
-    }
-  ]
-};
 
 // Generate context based on inches value
 let contextActivity = "ingegneria e design";
@@ -85,8 +52,26 @@ else if (context === "industrial") contextActivity = "large-scale projects";
   title={title}
   description={description}
   keywords={keywords}
-  canonical={productionCanonicalURL}
-  breadcrumbSchema={breadcrumbSchema}
+>
+  <!-- BreadcrumbList schema for calculation pages only -->
+  <script type="application/ld+json" slot="head">
+    {
+      "@context": "http://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "Thing",
+            "@id": `https://pollici-in-cm.it/${slug}`,
+            "name": `${inches} Pollici`
+          }
+        }
+      ]
+    }
+  </script>
+
   <Header />
   
   <main id="main-content" class="pt-20 lg:pt-24">

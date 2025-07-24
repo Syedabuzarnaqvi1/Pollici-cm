@@ -6,7 +6,6 @@ export interface Props {
   canonical?: string;
   isHomepage?: boolean;
   breadcrumbName?: string;
-  breadcrumbSchema?: object;
 }
 
 const { 
@@ -15,8 +14,7 @@ const {
   keywords = "pollici cm, conversione pollici centimetri, calcolatore pollici, inches to cm", 
   canonical,
   isHomepage = false,
-  breadcrumbName,
-  breadcrumbSchema
+  breadcrumbName
 } = Astro.props;
 
 const canonicalURL = canonical || Astro.url.href;
@@ -68,15 +66,9 @@ const productionCanonicalURL = canonical || canonicalURL.replace('http://localho
         "url": "https://pollici-in-cm.it/"
       }
     </script>
-    
-    <!-- BreadcrumbList schema only on calculation pages -->
-    {breadcrumbSchema && (
-      <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)}></script>
     )}
     
-    <!-- Hreflang tags -->
-    <link rel="alternate" hreflang="it" href={productionCanonicalURL} />
-    <link rel="alternate" hreflang="x-default" href={productionCanonicalURL} />
+    <!-- BreadcrumbList schema for non-homepage pages -->
   </head>
   
   <body class="bg-neutral-900 text-neutral-200">
@@ -89,58 +81,8 @@ const productionCanonicalURL = canonical || canonicalURL.replace('http://localho
     
     <!-- Global JavaScript -->
     <script>
-      // Header functionality
+      // Smooth scrolling for anchor links
       document.addEventListener('DOMContentLoaded', function() {
-        // Header scroll effect
-        const header = document.getElementById('main-header');
-        if (header) {
-          window.addEventListener('scroll', function() {
-            if (window.scrollY > 50) {
-              header.classList.add('bg-neutral-900/90', 'backdrop-blur-md', 'shadow-lg');
-              header.classList.remove('bg-transparent');
-            } else {
-              header.classList.remove('bg-neutral-900/90', 'backdrop-blur-md', 'shadow-lg');
-              header.classList.add('bg-transparent');
-            }
-          });
-        }
-
-        // Mobile menu toggle
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const menuIcon = document.getElementById('menu-icon');
-        const closeIcon = document.getElementById('close-icon');
-        
-        if (mobileMenuButton && mobileMenu) {
-          mobileMenuButton.addEventListener('click', function() {
-            const isOpen = mobileMenu.style.display !== 'none';
-            
-            if (isOpen) {
-              mobileMenu.style.display = 'none';
-              menuIcon.style.display = 'block';
-              closeIcon.style.display = 'none';
-              mobileMenuButton.setAttribute('aria-expanded', 'false');
-            } else {
-              mobileMenu.style.display = 'block';
-              menuIcon.style.display = 'none';
-              closeIcon.style.display = 'block';
-              mobileMenuButton.setAttribute('aria-expanded', 'true');
-            }
-          });
-
-          // Close mobile menu when clicking on links
-          const mobileLinks = mobileMenu.querySelectorAll('a');
-          mobileLinks.forEach(link => {
-            link.addEventListener('click', function() {
-              mobileMenu.style.display = 'none';
-              menuIcon.style.display = 'block';
-              closeIcon.style.display = 'none';
-              mobileMenuButton.setAttribute('aria-expanded', 'false');
-            });
-          });
-        }
-
-        // Smooth scrolling for anchor links
         const links = document.querySelectorAll('a[href^="#"]');
         links.forEach(link => {
           link.addEventListener('click', function(e) {

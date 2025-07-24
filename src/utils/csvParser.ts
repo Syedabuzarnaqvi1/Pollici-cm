@@ -62,6 +62,15 @@ export function generateRelatedConversions(currentInches: number, allData: Conve
       const existing = allData.find(item => Math.abs(item.inches - targetInches) < 0.001);
       if (existing) {
         related.push(existing);
+      } else {
+        // Generate calculated conversion if not in dataset
+        related.push({
+          inches: targetInches,
+          centimeters: Math.round(targetInches * 2.54 * 100) / 100,
+          uniqueFact: '',
+          context: 'daily life',
+          slug: `${targetInches.toString().replace('.', '-')}-pollici-in-cm`
+        });
       }
     }
   }
