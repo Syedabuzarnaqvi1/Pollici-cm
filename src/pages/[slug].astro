@@ -51,6 +51,10 @@ const title = `Converti ${inches} Pollici in Centimetri | Calcolatore Preciso On
 const description = `Converti ${inches} pollici in centimetri istantaneamente. ${inches} pollici = ${centimeters} cm. Calcolatore gratuito con formula precisa e conversioni correlate.`;
 const keywords = `${inches} pollici cm, conversione ${inches} pollici centimetri, ${inches} in to cm, calcolatore ${inches} pollici`;
 
+// Generate canonical URL
+const canonicalURL = canonical || Astro.url.href;
+const productionCanonicalURL = canonical || canonicalURL.replace('http://localhost:4321', 'https://pollici-in-cm.it');
+
 // Generate BreadcrumbList schema
 const breadcrumbSchema = {
   "@context": "http://schema.org",
