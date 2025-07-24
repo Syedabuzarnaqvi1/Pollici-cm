@@ -36,6 +36,10 @@ const productionCanonicalURL = canonical || canonicalURL.replace('http://localho
     <meta name="keywords" content={keywords} />
     <link rel="canonical" href={productionCanonicalURL} />
     
+    <!-- Hreflang -->
+    <link rel="alternate" hreflang="it" href={productionCanonicalURL} />
+    <link rel="alternate" hreflang="x-default" href={productionCanonicalURL} />
+    
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />

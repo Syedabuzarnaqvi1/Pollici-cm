@@ -54,23 +54,14 @@ export function parseCSV(csvContent: string): ConversionData[] {
 
 export function generateRelatedConversions(currentInches: number, allData: ConversionData[]) {
   const related = [];
-  const variations = [-0.2, -0.1, -0.05, 0.05, 0.1, 0.2];
+  const variations = [-0.5, -0.25, -0.1, 0.1, 0.25, 0.5];
   
   for (const variation of variations) {
-    const targetInches = Math.round((currentInches + variation) * 100) / 100;
+    const targetInches = parseFloat((currentInches + variation).toFixed(2));
     if (targetInches > 0) {
-      const existing = allData.find(item => Math.abs(item.inches - targetInches) < 0.001);
+      const existing = allData.find(item => item.inches === targetInches);
       if (existing) {
         related.push(existing);
-      } else {
-        // Generate calculated conversion if not in dataset
-        related.push({
-          inches: targetInches,
-          centimeters: Math.round(targetInches * 2.54 * 100) / 100,
-          uniqueFact: '',
-          context: 'daily life',
-          slug: `${targetInches.toString().replace('.', '-')}-pollici-in-cm`
-        });
       }
     }
   }
