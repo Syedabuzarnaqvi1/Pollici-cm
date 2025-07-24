@@ -36,6 +36,23 @@ const navigationLinks = {
   sequential: generateSequentialLinks(inches, allConversions)
 };
 
+// BreadcrumbList schema for calculation pages
+const breadcrumbSchema = {
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@type": "Thing",
+        "@id": `https://pollici-in-cm.it/${slug}`,
+        "name": `${inches} Pollici`
+      }
+    }
+  ]
+};
+
 // SEO content generation
 const title = `Converti ${inches} Pollici in Centimetri | Calcolatore Preciso Online`;
 const description = `Converti ${inches} pollici in centimetri istantaneamente. ${inches} pollici = ${centimeters} cm. Calcolatore gratuito con formula precisa e conversioni correlate.`;
@@ -54,23 +71,7 @@ else if (context === "industrial") contextActivity = "large-scale projects";
   keywords={keywords}
 >
   <!-- BreadcrumbList schema for calculation pages only -->
-  <script type="application/ld+json" slot="head">
-    {
-      "@context": "http://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "item": {
-            "@type": "Thing",
-            "@id": `https://pollici-in-cm.it/${slug}`,
-            "name": `${inches} Pollici`
-          }
-        }
-      ]
-    }
-  </script>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(breadcrumbSchema)} />
 
   <Header />
   
