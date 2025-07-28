@@ -53,20 +53,60 @@ export function parseCSV(csvContent: string): ConversionData[] {
 }
 
 export function generateRelatedConversions(currentInches: number, allData: ConversionData[]) {
-  const related = [];
-  const variations = [-0.5, -0.25, -0.1, 0.1, 0.25, 0.5];
+  const related: ConversionData[] = [];
+  const variations = [-0.1, -0.05, 0.05, 0.1];
   
   for (const variation of variations) {
     const targetInches = parseFloat((currentInches + variation).toFixed(2));
-    if (targetInches > 0) {
+    if (targetInches >= 0) {
       const existing = allData.find(item => item.inches === targetInches);
       if (existing) {
         related.push(existing);
+      } else if (targetInches >= 0) {
+        // Calculate if not found in data
+        const calculatedCm = parseFloat((targetInches * 2.54).toFixed(2));
+        const slug = `${targetInches.toString().replace('.', '-')}-pollici-in-cm`;
+        related.push({
+          inches: targetInches,
+          centimeters: calculatedCm,
+          uniqueFact: `${targetInches} pollici rappresentano una misura precisa utilizzata in vari contesti professionali.`,
+          context: 'general',
+          slug: slug
+        });
       }
     }
   }
   
   return related;
+}
+
+export function generateHistoricalTrivia(inches: number): string {
+  const triviaOptions = [
+    `Il pollice come unità di misura risale all'antica Roma, dove era chiamato "uncia" e rappresentava 1/12 di piede romano.`,
+    `Nel Medioevo, il pollice era definito come la larghezza del pollice del re, rendendo le misurazioni variabili tra regni diversi.`,
+    `La standardizzazione moderna del pollice a 2.54 cm esatti fu stabilita nel 1959 dall'International Yard and Pound Agreement.`,
+    `Gli antichi Egizi utilizzavano il "digit" (dito) come unità simile al pollice per costruire le piramidi con precisione millimetrica.`,
+    `Durante la Rivoluzione Industriale, la precisione del pollice divenne cruciale per la produzione di componenti intercambiabili.`,
+    `Il sistema imperiale britannico, che include il pollice, fu esportato in tutto l'impero e ancora oggi influenza le misurazioni globali.`,
+    `Leonardo da Vinci utilizzava proporzioni basate sul pollice nei suoi studi anatomici e architettonici del Rinascimento.`,
+    `La NASA utilizza ancora il sistema imperiale per alcuni calcoli, rendendo la conversione pollici-centimetri essenziale per l'esplorazione spaziale.`
+  ];
+  
+  const index = Math.floor(inches * 7) % triviaOptions.length;
+  return triviaOptions[index];
+}
+
+export function getContextActivity(context: string): string {
+  switch (context) {
+    case 'technology':
+      return 'progettazione di dispositivi';
+    case 'daily life':
+      return 'cucina e vita quotidiana';
+    case 'industrial':
+      return 'progetti su larga scala';
+    default:
+      return 'ingegneria e design';
+  }
 }
 
 export function generateCategoryLinks(currentInches: number, allData: ConversionData[]) {

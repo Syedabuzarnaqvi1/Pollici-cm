@@ -13,7 +13,10 @@ export const GET: APIRoute = async () => {
   const staticPages = [
     { url: '', priority: '1.0', changefreq: 'weekly' },
     { url: '/chi-siamo', priority: '0.8', changefreq: 'monthly' },
-    { url: '/conversioni-popolari', priority: '0.9', changefreq: 'weekly' }
+    { url: '/conversioni-popolari', priority: '0.9', changefreq: 'weekly' },
+    { url: '/contatti', priority: '0.7', changefreq: 'monthly' },
+    { url: '/privacy-policy', priority: '0.6', changefreq: 'yearly' },
+    { url: '/disclaimer', priority: '0.6', changefreq: 'yearly' }
   ];
   
   // Generate XML
@@ -48,7 +51,7 @@ export const GET: APIRoute = async () => {
   return new Response(xml, {
     headers: {
       'Content-Type': 'application/xml',
-      'Cache-Control': 'public, max-age=86400' // Cache for 24 hours
+      'Cache-Control': 'public, max-age=43200' // Cache for 12 hours due to frequent updates
     }
   });
 };

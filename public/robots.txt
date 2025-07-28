@@ -4,11 +4,11 @@ Allow: /
 # Sitemap
 Sitemap: https://pollici-in-cm.it/sitemap.xml
 
-# Allow indexing of all conversion pages
+# Allow indexing of all 735+ conversion pages
 Allow: /*-pollici-in-cm/
 
 # Crawl-delay for respectful crawling
-Crawl-delay: 1
+Crawl-delay: 2
 
 # Allow all major search engines
 User-agent: Googlebot
@@ -32,6 +32,10 @@ Allow: /
 User-agent: facebookexternalhit
 Allow: /
 
+# Specific directives for large site
+User-agent: *
+Request-rate: 1/10s
+
 # Block common spam bots
 User-agent: AhrefsBot
 Disallow: /
@@ -41,3 +45,12 @@ Disallow: /
 
 User-agent: DotBot
 Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+# Additional sitemap references for better discovery
+Sitemap: https://pollici-in-cm.it/sitemap.xml

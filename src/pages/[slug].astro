@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { parseCSV, generateRelatedConversions, generateCategoryLinks, generateRandomLinks, generatePopularLinks, generateSequentialLinks } from '../utils/csvParser';
+import { parseCSV, generateRelatedConversions, generateCategoryLinks, generateRandomLinks, generatePopularLinks, generateSequentialLinks, generateHistoricalTrivia, getContextActivity } from '../utils/csvParser';
 
 // Import CSV data
 import csvData from '../assets/Inches to CM Data.csv?raw';
@@ -59,10 +59,25 @@ const description = `Converti ${inches} pollici in centimetri istantaneamente. $
 const keywords = `${inches} pollici cm, conversione ${inches} pollici centimetri, ${inches} in to cm, calcolatore ${inches} pollici`;
 
 // Generate context based on inches value
-let contextActivity = "ingegneria e design";
-if (context === "technology") contextActivity = "device design";
-else if (context === "daily life") contextActivity = "cooking";
-else if (context === "industrial") contextActivity = "large-scale projects";
+const contextActivity = getContextActivity(context);
+const historicalTrivia = generateHistoricalTrivia(inches);
+
+// Generate additional unique content
+const additionalContent = {
+  practicalUse: inches < 1 ? 
+    `Misure così precise come ${inches} pollici sono fondamentali nell'industria elettronica e nella micromeccanica, dove ogni frazione di millimetro può determinare il successo di un progetto.` :
+    inches <= 12 ?
+    `La misura di ${inches} pollici trova applicazione quotidiana in settori come l'arredamento, la sartoria e l'architettura d'interni.` :
+    `Dimensioni di ${inches} pollici sono tipiche di schermi, pannelli e componenti industriali che richiedono precisione nella progettazione.`,
+  
+  technicalNote: `Dal punto di vista tecnico, ${inches} pollici corrispondono a ${(inches * 25.4).toFixed(1)} millimetri, una conversione essenziale per l'interfaccia tra sistemi di misurazione anglosassoni e metrici.`,
+  
+  industryStandard: context === 'technology' ?
+    `Nel settore tecnologico, ${inches} pollici rappresentano una dimensione standard per display, componenti elettronici e dispositivi di precisione.` :
+    context === 'industrial' ?
+    `Nell'industria manifatturiera, ${inches} pollici sono una misura critica per tubi, profilati e componenti strutturali.` :
+    `In ambito domestico e artigianale, ${inches} pollici sono una misura comune per utensili, materiali e progetti fai-da-te.`
+};
 ---
 
 <Layout
@@ -191,10 +206,19 @@ else if (context === "industrial") contextActivity = "large-scale projects";
                 <em>{uniqueFact}</em>
               </p>
               <p>
+                <em>{additionalContent.practicalUse}</em>
+              </p>
+              <p>
                 <em>Convertire {inches} pollici in centimetri è semplice: moltiplica per 2.54. Quindi {inches} pollici × 2.54 = {centimeters} cm. Questa conversione è particolarmente utile in settori come {contextActivity}, dove le misurazioni precise sono fondamentali.</em>
               </p>
               <p>
-                <em>Il fattore di conversione 2.54 deriva dalla definizione internazionale stabilita nel 1959, che garantisce uniformità mondiale nelle misurazioni. Questa standardizzazione è essenziale per il commercio internazionale e la collaborazione tecnica.</em>
+                <em>{additionalContent.technicalNote}</em>
+              </p>
+              <p>
+                <em>{historicalTrivia}</em>
+              </p>
+              <p>
+                <em>{additionalContent.industryStandard}</em>
               </p>
             </div>
           </article>
@@ -398,7 +422,7 @@ else if (context === "industrial") contextActivity = "large-scale projects";
                   <em>In quali contesti si usa la misura di {inches} pollici?</em>
                 </h3>
                 <p class="text-neutral-600 dark:text-neutral-400 italic">
-                  <em>La misura di {inches} pollici è comunemente utilizzata in {contextActivity} e in molte applicazioni internazionali dove è necessaria la conversione tra sistemi di misurazione.</em>
+                  <em>La misura di {inches} pollici è comunemente utilizzata in {contextActivity} e in molte applicazioni internazionali dove è necessaria la conversione tra sistemi di misurazione. {additionalContent.industryStandard}</em>
                 </p>
               </div>
             </div>
