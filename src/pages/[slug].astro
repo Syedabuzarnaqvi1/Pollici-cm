@@ -54,9 +54,13 @@ const breadcrumbSchema = {
 };
 
 // SEO content generation
-const title = `Converti ${inches} Pollici in Centimetri | Calcolatore Preciso Online`;
-const description = `Converti ${inches} pollici in centimetri istantaneamente. ${inches} pollici = ${centimeters} cm. Calcolatore gratuito con formula precisa e conversioni correlate.`;
-const keywords = `${inches} pollici cm, conversione ${inches} pollici centimetri, ${inches} in to cm, calcolatore ${inches} pollici`;
+// SEO Keywords
+const mainKeyword = `${inches} pollici in cm`;
+const secondaryKeyword = `${inches} pollici in centimetri`;
+
+const title = `Converti ${inches} Pollici in Centimetri - Calcolatore Preciso`;
+const description = `${mainKeyword}: converti ${inches} pollici in centimetri con precisione. ${inches} pollici = ${centimeters} cm. Calcolatore ${secondaryKeyword} gratuito.`;
+const keywords = `${mainKeyword}, ${secondaryKeyword}, conversione ${inches} pollici, calcolatore ${inches} pollici`;
 
 // Generate context based on inches value
 const contextActivity = getContextActivity(context);
@@ -65,18 +69,18 @@ const historicalTrivia = generateHistoricalTrivia(inches);
 // Generate additional unique content
 const additionalContent = {
   practicalUse: inches < 1 ? 
-    `Misure così precise come ${inches} pollici sono fondamentali nell'industria elettronica e nella micromeccanica, dove ogni frazione di millimetro può determinare il successo di un progetto.` :
+    `La conversione ${mainKeyword} è fondamentale nell'industria elettronica e nella micromeccanica, dove misure precise come ${inches} pollici determinano il successo di un progetto.` :
     inches <= 12 ?
-    `La misura di ${inches} pollici trova applicazione quotidiana in settori come l'arredamento, la sartoria e l'architettura d'interni.` :
-    `Dimensioni di ${inches} pollici sono tipiche di schermi, pannelli e componenti industriali che richiedono precisione nella progettazione.`,
+    `Calcolare ${mainKeyword} trova applicazione quotidiana in settori come l'arredamento, la sartoria e l'architettura d'interni dove ${secondaryKeyword} è essenziale.` :
+    `La conversione ${mainKeyword} è tipica per schermi, pannelli e componenti industriali che richiedono precisione nella progettazione.`,
   
-  technicalNote: `Dal punto di vista tecnico, ${inches} pollici corrispondono a ${(inches * 25.4).toFixed(1)} millimetri, una conversione essenziale per l'interfaccia tra sistemi di misurazione anglosassoni e metrici.`,
+  technicalNote: `Dal punto di vista tecnico, la conversione ${mainKeyword} corrisponde a ${(inches * 25.4).toFixed(1)} millimetri. Sapere come convertire ${secondaryKeyword} è essenziale per l'interfaccia tra sistemi di misurazione.`,
   
   industryStandard: context === 'technology' ?
-    `Nel settore tecnologico, ${inches} pollici rappresentano una dimensione standard per display, componenti elettronici e dispositivi di precisione.` :
+    `Nel settore tecnologico, la misura ${mainKeyword} rappresenta una dimensione standard per display, componenti elettronici e dispositivi di precisione.` :
     context === 'industrial' ?
-    `Nell'industria manifatturiera, ${inches} pollici sono una misura critica per tubi, profilati e componenti strutturali.` :
-    `In ambito domestico e artigianale, ${inches} pollici sono una misura comune per utensili, materiali e progetti fai-da-te.`
+    `Nell'industria manifatturiera, convertire ${mainKeyword} è critico per tubi, profilati e componenti strutturali.` :
+    `In ambito domestico e artigianale, la conversione ${secondaryKeyword} è comune per utensili, materiali e progetti fai-da-te.`
 };
 ---
 
@@ -95,11 +99,11 @@ const additionalContent = {
     <section class="py-16 lg:py-24 bg-gradient-to-br from-primary-50 to-neutral-100 dark:from-neutral-800 dark:to-neutral-900">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="max-w-4xl mx-auto text-center">
-          <h1 class="text-4xl lg:text-5xl font-bold text-neutral-800 dark:text-neutral-200 mb-6 serif">
+          <h1 class="text-4xl lg:text-5xl font-bold text-neutral-800 dark:text-neutral-200 mb-6 serif" id="main-heading">
             <em>Converti {inches} Pollici in Centimetri</em>
           </h1>
           <p class="text-xl text-neutral-600 dark:text-neutral-400 mb-8 italic leading-relaxed">
-            <em>{inches} pollici equivalgono esattamente a <strong>{centimeters} centimetri</strong></em>
+            <em>La conversione {mainKeyword}: {inches} pollici equivalgono esattamente a <strong>{centimeters} centimetri</strong></em>
           </p>
           <div class="bg-white dark:bg-neutral-800 rounded-xl p-6 shadow-lg inline-block">
             <div class="text-3xl font-bold text-primary-600 dark:text-primary-400 mb-2">
@@ -209,7 +213,7 @@ const additionalContent = {
                 <em>{additionalContent.practicalUse}</em>
               </p>
               <p>
-                <em>Convertire {inches} pollici in centimetri è semplice: moltiplica per 2.54. Quindi {inches} pollici × 2.54 = {centimeters} cm. Questa conversione è particolarmente utile in settori come {contextActivity}, dove le misurazioni precise sono fondamentali.</em>
+                <em>La conversione {mainKeyword} è semplice: moltiplica per 2.54. Quindi {inches} pollici × 2.54 = {centimeters} cm. Convertire {secondaryKeyword} è particolarmente utile in settori come {contextActivity}, dove le misurazioni precise sono fondamentali.</em>
               </p>
               <p>
                 <em>{additionalContent.technicalNote}</em>
@@ -401,28 +405,28 @@ const additionalContent = {
             <div class="space-y-6">
               <div class="border-b border-neutral-200 dark:border-neutral-600 pb-4">
                 <h3 class="font-semibold text-neutral-700 dark:text-neutral-300 mb-2 italic">
-                  <em>Quanto sono {inches} pollici in centimetri?</em>
+                  <em>Come convertire {mainKeyword}?</em>
                 </h3>
                 <p class="text-neutral-600 dark:text-neutral-400 italic">
-                  <em>{inches} pollici corrispondono esattamente a {centimeters} centimetri, utilizzando il fattore di conversione internazionale standard di 2.54 cm per pollice.</em>
+                  <em>Per convertire {mainKeyword}, {inches} pollici corrispondono esattamente a {centimeters} centimetri, utilizzando il fattore di conversione internazionale standard di 2.54 cm per pollice.</em>
                 </p>
               </div>
 
               <div class="border-b border-neutral-200 dark:border-neutral-600 pb-4">
                 <h3 class="font-semibold text-neutral-700 dark:text-neutral-300 mb-2 italic">
-                  <em>Come si calcola la conversione di {inches} pollici?</em>
+                  <em>Qual è la formula per {secondaryKeyword}?</em>
                 </h3>
                 <p class="text-neutral-600 dark:text-neutral-400 italic">
-                  <em>Per convertire {inches} pollici in centimetri, moltiplica {inches} per 2.54. La formula è: {inches} × 2.54 = {centimeters} cm.</em>
+                  <em>Per calcolare {secondaryKeyword}, moltiplica {inches} per 2.54. La formula per {mainKeyword} è: {inches} × 2.54 = {centimeters} cm.</em>
                 </p>
               </div>
 
               <div>
                 <h3 class="font-semibold text-neutral-700 dark:text-neutral-300 mb-2 italic">
-                  <em>In quali contesti si usa la misura di {inches} pollici?</em>
+                  <em>Quando è utile convertire {mainKeyword}?</em>
                 </h3>
                 <p class="text-neutral-600 dark:text-neutral-400 italic">
-                  <em>La misura di {inches} pollici è comunemente utilizzata in {contextActivity} e in molte applicazioni internazionali dove è necessaria la conversione tra sistemi di misurazione. {additionalContent.industryStandard}</em>
+                  <em>La conversione {mainKeyword} è comunemente utilizzata in {contextActivity} e in molte applicazioni internazionali. Sapere come convertire {secondaryKeyword} è essenziale in questi settori. {additionalContent.industryStandard}</em>
                 </p>
               </div>
             </div>
