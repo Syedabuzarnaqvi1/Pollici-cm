@@ -54,12 +54,13 @@ const breadcrumbSchema = {
 };
 
 // SEO content generation
-// SEO Keyword Optimization
-const mainKeyword = `${inches} pollici in cm`;
-const secondaryKeyword = `${inches} pollici in centimetri`;
-const title = `Converti ${inches} Pollici in Centimetri - Calcolatore Preciso`;
-const description = `Converti ${inches} pollici in cm (${centimeters} cm) con il nostro calcolatore. Scopri ${inches} pollici in centimetri per ${contextActivity}.`;
-const keywords = `${mainKeyword}, ${secondaryKeyword}, conversione ${inches} pollici, calcolatore ${inches} pollici`;
+const title = `Converti ${inches} Pollici in Centimetri | Calcolatore Preciso Online`;
+const description = `Converti ${inches} pollici in centimetri istantaneamente. ${inches} pollici = ${centimeters} cm. Calcolatore gratuito con formula precisa e conversioni correlate.`;
+const keywords = `${inches} pollici cm, conversione ${inches} pollici centimetri, ${inches} in to cm, calcolatore ${inches} pollici`;
+
+// Generate context based on inches value
+const contextActivity = getContextActivity(context);
+const historicalTrivia = generateHistoricalTrivia(inches);
 
 // Generate additional unique content
 const additionalContent = {
@@ -94,17 +95,17 @@ const additionalContent = {
     <section class="py-16 lg:py-24 bg-gradient-to-br from-primary-50 to-neutral-100 dark:from-neutral-800 dark:to-neutral-900">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="max-w-4xl mx-auto text-center">
-          <h1 class="text-4xl lg:text-5xl font-bold text-neutral-200 mb-6 serif">
+          <h1 class="text-4xl lg:text-5xl font-bold text-neutral-800 dark:text-neutral-200 mb-6 serif">
             <em>Converti {inches} Pollici in Centimetri</em>
           </h1>
-          <p class="text-xl text-neutral-400 mb-8 italic leading-relaxed">
-            <em>Scopri quanto sono {inches} pollici in cm: esattamente <strong>{centimeters} centimetri</strong></em>
+          <p class="text-xl text-neutral-600 dark:text-neutral-400 mb-8 italic leading-relaxed">
+            <em>{inches} pollici equivalgono esattamente a <strong>{centimeters} centimetri</strong></em>
           </p>
-          <div class="bg-neutral-800 rounded-xl p-6 shadow-lg inline-block">
-            <div class="text-3xl font-bold text-primary-400 mb-2">
+          <div class="bg-white dark:bg-neutral-800 rounded-xl p-6 shadow-lg inline-block">
+            <div class="text-3xl font-bold text-primary-600 dark:text-primary-400 mb-2">
               {inches}" = {centimeters} cm
             </div>
-            <p class="text-sm text-neutral-400 italic">
+            <p class="text-sm text-neutral-600 dark:text-neutral-400 italic">
               <em>Formula: {inches} × 2.54 = {centimeters}</em>
             </p>
           </div>
@@ -113,24 +114,24 @@ const additionalContent = {
     </section>
 
     <!-- Calculator Section -->
-    <section class="py-16 lg:py-24 bg-neutral-800">
+    <section class="py-16 lg:py-24 bg-white dark:bg-neutral-800">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="max-w-4xl mx-auto">
           <div class="text-center mb-12">
-            <h2 class="text-3xl lg:text-4xl font-bold text-neutral-200 mb-4 serif">
+            <h2 class="text-3xl lg:text-4xl font-bold text-neutral-800 dark:text-neutral-200 mb-4 serif">
               <em>Calcolatore Pollici - Centimetri</em>
             </h2>
-            <p class="text-lg text-neutral-400 italic">
-              <em>Converti {inches} pollici in centimetri e scopri altre conversioni precise</em>
+            <p class="text-lg text-neutral-600 dark:text-neutral-400 italic">
+              <em>Prova altre conversioni con il nostro calcolatore preciso</em>
             </p>
           </div>
 
-          <div class="bg-gradient-to-br from-neutral-700 to-neutral-800 rounded-2xl p-8 shadow-xl">
+          <div class="bg-gradient-to-br from-primary-50 to-neutral-100 dark:from-neutral-700 dark:to-neutral-800 rounded-2xl p-8 shadow-xl">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
               <!-- Input Section -->
               <div class="space-y-6">
                 <div>
-                  <label for="inches-input" class="block text-sm font-semibold text-neutral-300 mb-2">
+                  <label for="inches-input" class="block text-sm font-semibold text-neutral-700 dark:text-neutral-300 mb-2">
                     <em>Inserisci i pollici da convertire:</em>
                   </label>
                   <div class="relative">
@@ -140,9 +141,9 @@ const additionalContent = {
                       value={inches}
                       step="0.01"
                       placeholder="es. 12.5"
-                      class="w-full px-4 py-3 text-lg border-2 border-neutral-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-neutral-700 text-neutral-200 transition-all duration-200"
+                      class="w-full px-4 py-3 text-lg border-2 border-primary-200 dark:border-neutral-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-neutral-700 dark:text-neutral-200 transition-all duration-200"
                     />
-                    <span class="absolute right-3 top-3 text-neutral-400 font-medium">pollici</span>
+                    <span class="absolute right-3 top-3 text-neutral-500 dark:text-neutral-400 font-medium">pollici</span>
                   </div>
                 </div>
 
@@ -156,29 +157,29 @@ const additionalContent = {
 
               <!-- Results Section -->
               <div class="space-y-6">
-                <div class="bg-neutral-800 rounded-xl p-6 shadow-md">
-                  <h3 class="text-xl font-bold text-neutral-200 mb-4 serif">
+                <div class="bg-white dark:bg-neutral-800 rounded-xl p-6 shadow-md">
+                  <h3 class="text-xl font-bold text-neutral-800 dark:text-neutral-200 mb-4 serif">
                     <em>Risultato:</em>
                   </h3>
                   
                   <div class="space-y-4">
-                    <div class="flex justify-between items-center p-3 bg-neutral-700 rounded-lg">
-                      <span class="font-medium text-neutral-300 italic">
+                    <div class="flex justify-between items-center p-3 bg-primary-50 dark:bg-neutral-700 rounded-lg">
+                      <span class="font-medium text-neutral-700 dark:text-neutral-300 italic">
                         <em>Centimetri:</em>
                       </span>
-                      <span class="text-xl font-bold text-primary-400" id="result-cm">{centimeters} cm</span>
+                      <span class="text-xl font-bold text-primary-600 dark:text-primary-400" id="result-cm">{centimeters} cm</span>
                     </div>
 
-                    <div class="flex justify-between items-center p-3 bg-neutral-700 rounded-lg">
-                      <span class="font-medium text-neutral-300 italic">
+                    <div class="flex justify-between items-center p-3 bg-neutral-100 dark:bg-neutral-700 rounded-lg">
+                      <span class="font-medium text-neutral-700 dark:text-neutral-300 italic">
                         <em>Millimetri:</em>
                       </span>
-                      <span class="text-xl font-bold text-neutral-400" id="result-mm">{centimeters * 10} mm</span>
+                      <span class="text-xl font-bold text-neutral-600 dark:text-neutral-400" id="result-mm">{centimeters * 10} mm</span>
                     </div>
                   </div>
 
-                  <div class="mt-6 p-4 bg-neutral-600 rounded-lg">
-                    <p class="text-sm text-neutral-300 italic" id="formula">
+                  <div class="mt-6 p-4 bg-primary-100 dark:bg-neutral-600 rounded-lg">
+                    <p class="text-sm text-neutral-700 dark:text-neutral-300 italic" id="formula">
                       <em><strong>Formula:</strong> <span id="formula-inches">{inches}</span> pollici × 2.54 = <span id="formula-result">{centimeters}</span> cm</em>
                     </p>
                   </div>
@@ -191,19 +192,16 @@ const additionalContent = {
     </section>
 
     <!-- Content Section -->
-    <section class="py-16 lg:py-24 bg-neutral-900">
+    <section class="py-16 lg:py-24 bg-neutral-50 dark:bg-neutral-900">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="max-w-4xl mx-auto space-y-12">
           
           <!-- About This Conversion -->
-          <article class="bg-neutral-800 rounded-2xl p-8 shadow-lg">
-            <h2 class="text-3xl font-bold text-neutral-200 mb-6 serif">
-              <em>Come Convertire {inches} Pollici in Centimetri</em>
+          <article class="bg-white dark:bg-neutral-800 rounded-2xl p-8 shadow-lg">
+            <h2 class="text-3xl font-bold text-neutral-800 dark:text-neutral-200 mb-6 serif">
+              <em>Informazioni sulla Conversione di {inches} Pollici</em>
             </h2>
-            <div class="prose prose-lg max-w-none text-neutral-400 italic space-y-6">
-              <p>
-                <em>Per convertire {inches} pollici in cm, utilizza la formula standard: {inches} × 2.54 = {centimeters} cm. Questa conversione di {inches} pollici in centimetri è essenziale per {contextActivity}.</em>
-              </p>
+            <div class="prose prose-lg max-w-none text-neutral-600 dark:text-neutral-400 italic space-y-6">
               <p>
                 <em>{uniqueFact}</em>
               </p>
@@ -211,7 +209,10 @@ const additionalContent = {
                 <em>{additionalContent.practicalUse}</em>
               </p>
               <p>
-                <em>La conversione di {inches} pollici in cm è particolarmente importante in {contextActivity}, dove la precisione è fondamentale. {additionalContent.technicalNote}</em>
+                <em>Convertire {inches} pollici in centimetri è semplice: moltiplica per 2.54. Quindi {inches} pollici × 2.54 = {centimeters} cm. Questa conversione è particolarmente utile in settori come {contextActivity}, dove le misurazioni precise sono fondamentali.</em>
+              </p>
+              <p>
+                <em>{additionalContent.technicalNote}</em>
               </p>
               <p>
                 <em>{historicalTrivia}</em>
@@ -223,34 +224,34 @@ const additionalContent = {
           </article>
 
           <!-- Related Conversions -->
-          <article class="bg-neutral-800 rounded-2xl p-8 shadow-lg">
-            <h2 class="text-3xl font-bold text-neutral-200 mb-6 serif">
+          <article class="bg-white dark:bg-neutral-800 rounded-2xl p-8 shadow-lg">
+            <h2 class="text-3xl font-bold text-neutral-800 dark:text-neutral-200 mb-6 serif">
               <em>Conversioni Correlate</em>
             </h2>
             <div class="overflow-x-auto">
               <table class="w-full text-left border-collapse">
                 <thead>
-                  <tr class="bg-neutral-700">
-                    <th class="p-4 border border-neutral-600 font-semibold text-neutral-200">
+                  <tr class="bg-primary-50 dark:bg-neutral-700">
+                    <th class="p-4 border border-neutral-200 dark:border-neutral-600 font-semibold text-neutral-800 dark:text-neutral-200">
                       <em>Pollici</em>
                     </th>
-                    <th class="p-4 border border-neutral-600 font-semibold text-neutral-200">
+                    <th class="p-4 border border-neutral-200 dark:border-neutral-600 font-semibold text-neutral-800 dark:text-neutral-200">
                       <em>Centimetri</em>
                     </th>
                   </tr>
                 </thead>
                 <tbody>
                   {relatedConversions.map((related) => (
-                    <tr class="hover:bg-neutral-700 transition-colors">
-                      <td class="p-4 border border-neutral-600">
+                    <tr class="hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-colors">
+                      <td class="p-4 border border-neutral-200 dark:border-neutral-600">
                         <a 
                           href={`/${related.slug}`} 
-                          class="text-primary-400 hover:text-primary-300 font-medium italic"
+                          class="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium italic"
                         >
                           <em>{related.inches} pollici</em>
                         </a>
                       </td>
-                      <td class="p-4 border border-neutral-600 text-neutral-400">
+                      <td class="p-4 border border-neutral-200 dark:border-neutral-600 text-neutral-600 dark:text-neutral-400">
                         {related.centimeters} cm
                       </td>
                     </tr>
@@ -261,24 +262,24 @@ const additionalContent = {
           </article>
 
           <!-- Navigation Links -->
-          <article class="bg-neutral-800 rounded-2xl p-8 shadow-lg">
-            <h2 class="text-3xl font-bold text-neutral-200 mb-6 serif">
+          <article class="bg-white dark:bg-neutral-800 rounded-2xl p-8 shadow-lg">
+            <h2 class="text-3xl font-bold text-neutral-800 dark:text-neutral-200 mb-6 serif">
               <em>Esplora Altre Conversioni</em>
             </h2>
             
             <!-- Previous/Next Navigation -->
-            <div class="flex justify-between items-center mb-8 p-4 bg-neutral-700 rounded-lg">
+            <div class="flex justify-between items-center mb-8 p-4 bg-primary-50 dark:bg-neutral-700 rounded-lg">
               <div class="flex-1">
                 {navigationLinks.previous && (
                   <a 
                     href={`/${navigationLinks.previous.slug}`}
-                    class="flex items-center text-primary-400 hover:text-primary-300 transition-colors"
+                    class="flex items-center text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors"
                   >
                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                     </svg>
                     <div>
-                      <div class="text-sm text-neutral-400 italic"><em>Precedente</em></div>
+                      <div class="text-sm text-neutral-600 dark:text-neutral-400 italic"><em>Precedente</em></div>
                       <div class="font-semibold italic"><em>{navigationLinks.previous.inches} Pollici</em></div>
                     </div>
                   </a>
@@ -289,10 +290,10 @@ const additionalContent = {
                 {navigationLinks.next && (
                   <a 
                     href={`/${navigationLinks.next.slug}`}
-                    class="flex items-center justify-end text-primary-400 hover:text-primary-300 transition-colors"
+                    class="flex items-center justify-end text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors"
                   >
                     <div class="text-right">
-                      <div class="text-sm text-neutral-400 italic"><em>Successivo</em></div>
+                      <div class="text-sm text-neutral-600 dark:text-neutral-400 italic"><em>Successivo</em></div>
                       <div class="font-semibold italic"><em>{navigationLinks.next.inches} Pollici</em></div>
                     </div>
                     <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -305,19 +306,19 @@ const additionalContent = {
 
             <!-- Category Links -->
             <div class="mb-8">
-              <h3 class="text-xl font-semibold text-neutral-200 mb-4 serif">
+              <h3 class="text-xl font-semibold text-neutral-800 dark:text-neutral-200 mb-4 serif">
                 <em>Conversioni Simili</em>
               </h3>
               <div class="grid grid-cols-2 md:grid-cols-6 gap-3">
                 {navigationLinks.category.slice(0, 12).map((item) => (
                   <a 
                     href={`/${item.slug}`}
-                    class="bg-neutral-700 hover:bg-neutral-600 p-3 rounded-lg text-center transition-colors group"
+                    class="bg-neutral-100 dark:bg-neutral-700 hover:bg-primary-100 dark:hover:bg-neutral-600 p-3 rounded-lg text-center transition-colors group"
                   >
-                    <div class="text-lg font-bold text-primary-400 group-hover:text-primary-300">
+                    <div class="text-lg font-bold text-primary-600 dark:text-primary-400 group-hover:text-primary-700 dark:group-hover:text-primary-300">
                       {item.inches}"
                     </div>
-                    <div class="text-sm text-neutral-400 italic">
+                    <div class="text-sm text-neutral-600 dark:text-neutral-400 italic">
                       <em>{item.centimeters} cm</em>
                     </div>
                   </a>
@@ -327,19 +328,19 @@ const additionalContent = {
 
             <!-- Sequential Links -->
             <div>
-              <h3 class="text-xl font-semibold text-neutral-200 mb-4 serif">
+              <h3 class="text-xl font-semibold text-neutral-800 dark:text-neutral-200 mb-4 serif">
                 <em>Conversioni Sequenziali</em>
               </h3>
               <div class="grid grid-cols-2 md:grid-cols-5 gap-3 mb-8">
                 {navigationLinks.sequential.slice(0, 10).map((item) => (
                   <a 
                     href={`/${item.slug}`}
-                    class="bg-neutral-700 hover:bg-neutral-600 p-3 rounded-lg text-center transition-colors group"
+                    class="bg-neutral-100 dark:bg-neutral-700 hover:bg-primary-100 dark:hover:bg-neutral-600 p-3 rounded-lg text-center transition-colors group"
                   >
-                    <div class="text-lg font-bold text-primary-400 group-hover:text-primary-300">
+                    <div class="text-lg font-bold text-primary-600 dark:text-primary-400 group-hover:text-primary-700 dark:group-hover:text-primary-300">
                       {item.inches}"
                     </div>
-                    <div class="text-sm text-neutral-400 italic">
+                    <div class="text-sm text-neutral-600 dark:text-neutral-400 italic">
                       <em>{item.centimeters} cm</em>
                     </div>
                   </a>
@@ -349,19 +350,19 @@ const additionalContent = {
 
             <!-- Popular Conversions -->
             <div class="mb-8">
-              <h3 class="text-xl font-semibold text-neutral-200 mb-4 serif">
+              <h3 class="text-xl font-semibold text-neutral-800 dark:text-neutral-200 mb-4 serif">
                 <em>Conversioni Popolari</em>
               </h3>
               <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
                 {navigationLinks.popular.slice(0, 10).map((item) => (
                   <a 
                     href={`/${item.slug}`}
-                    class="bg-neutral-700 hover:bg-neutral-600 p-3 rounded-lg text-center transition-colors group"
+                    class="bg-neutral-100 dark:bg-neutral-700 hover:bg-primary-100 dark:hover:bg-neutral-600 p-3 rounded-lg text-center transition-colors group"
                   >
-                    <div class="text-lg font-bold text-primary-400 group-hover:text-primary-300">
+                    <div class="text-lg font-bold text-primary-600 dark:text-primary-400 group-hover:text-primary-700 dark:group-hover:text-primary-300">
                       {item.inches}"
                     </div>
-                    <div class="text-sm text-neutral-400 italic">
+                    <div class="text-sm text-neutral-600 dark:text-neutral-400 italic">
                       <em>{item.centimeters} cm</em>
                     </div>
                   </a>
@@ -371,19 +372,19 @@ const additionalContent = {
 
             <!-- Random Discovery Links -->
             <div>
-              <h3 class="text-xl font-semibold text-neutral-200 mb-4 serif">
+              <h3 class="text-xl font-semibold text-neutral-800 dark:text-neutral-200 mb-4 serif">
                 <em>Scopri Altre Misure</em>
               </h3>
               <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
                 {navigationLinks.random.slice(0, 8).map((item) => (
                   <a 
                     href={`/${item.slug}`}
-                    class="bg-neutral-700 hover:bg-neutral-600 p-3 rounded-lg text-center transition-colors group"
+                    class="bg-neutral-100 dark:bg-neutral-700 hover:bg-primary-100 dark:hover:bg-neutral-600 p-3 rounded-lg text-center transition-colors group"
                   >
-                    <div class="text-lg font-bold text-primary-400 group-hover:text-primary-300">
+                    <div class="text-lg font-bold text-primary-600 dark:text-primary-400 group-hover:text-primary-700 dark:group-hover:text-primary-300">
                       {item.inches}"
                     </div>
-                    <div class="text-sm text-neutral-400 italic">
+                    <div class="text-sm text-neutral-600 dark:text-neutral-400 italic">
                       <em>{item.centimeters} cm</em>
                     </div>
                   </a>
@@ -393,34 +394,34 @@ const additionalContent = {
           </article>
 
           <!-- FAQ Section -->
-          <article class="bg-neutral-800 rounded-2xl p-8 shadow-lg">
-            <h2 class="text-3xl font-bold text-neutral-200 mb-6 serif">
+          <article class="bg-white dark:bg-neutral-800 rounded-2xl p-8 shadow-lg">
+            <h2 class="text-3xl font-bold text-neutral-800 dark:text-neutral-200 mb-6 serif">
               <em>Domande Frequenti su {inches} Pollici</em>
             </h2>
             <div class="space-y-6">
-              <div class="border-b border-neutral-600 pb-4">
-                <h3 class="font-semibold text-neutral-300 mb-2 italic">
-                  <em>Quanto sono {inches} pollici in cm?</em>
+              <div class="border-b border-neutral-200 dark:border-neutral-600 pb-4">
+                <h3 class="font-semibold text-neutral-700 dark:text-neutral-300 mb-2 italic">
+                  <em>Quanto sono {inches} pollici in centimetri?</em>
                 </h3>
-                <p class="text-neutral-400 italic">
-                  <em>{inches} pollici in cm corrispondono esattamente a {centimeters} centimetri. La conversione di {inches} pollici in centimetri utilizza il fattore standard di 2.54 cm per pollice.</em>
+                <p class="text-neutral-600 dark:text-neutral-400 italic">
+                  <em>{inches} pollici corrispondono esattamente a {centimeters} centimetri, utilizzando il fattore di conversione internazionale standard di 2.54 cm per pollice.</em>
                 </p>
               </div>
 
-              <div class="border-b border-neutral-600 pb-4">
-                <h3 class="font-semibold text-neutral-300 mb-2 italic">
+              <div class="border-b border-neutral-200 dark:border-neutral-600 pb-4">
+                <h3 class="font-semibold text-neutral-700 dark:text-neutral-300 mb-2 italic">
                   <em>Come si calcola la conversione di {inches} pollici?</em>
                 </h3>
-                <p class="text-neutral-400 italic">
-                  <em>Per convertire {inches} pollici in centimetri, moltiplica {inches} per 2.54. La formula per {inches} pollici in cm è: {inches} × 2.54 = {centimeters} cm.</em>
+                <p class="text-neutral-600 dark:text-neutral-400 italic">
+                  <em>Per convertire {inches} pollici in centimetri, moltiplica {inches} per 2.54. La formula è: {inches} × 2.54 = {centimeters} cm.</em>
                 </p>
               </div>
 
               <div>
-                <h3 class="font-semibold text-neutral-300 mb-2 italic">
+                <h3 class="font-semibold text-neutral-700 dark:text-neutral-300 mb-2 italic">
                   <em>In quali contesti si usa la misura di {inches} pollici?</em>
                 </h3>
-                <p class="text-neutral-400 italic">
+                <p class="text-neutral-600 dark:text-neutral-400 italic">
                   <em>La misura di {inches} pollici è comunemente utilizzata in {contextActivity} e in molte applicazioni internazionali dove è necessaria la conversione tra sistemi di misurazione. {additionalContent.industryStandard}</em>
                 </p>
               </div>
